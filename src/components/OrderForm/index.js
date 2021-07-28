@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button';
 import DetailSection from '../DetailSection';
 import ProductSection from '../ProductSection';
 
+const margin = {
+  margin: '0.5em',
+};
+
 const OrderForm = () => {
   return (
     <div>
@@ -16,8 +20,10 @@ const OrderForm = () => {
         alignItems="center"
       >
         <Grid item>
-          <Button variant="contained">Cancel</Button>
-          <Button variant="contained" color="primary" disabled>
+          <Button variant="contained" style={margin}>
+            Cancel
+          </Button>
+          <Button variant="contained" style={margin} color="primary" disabled>
             Confirm
           </Button>
         </Grid>

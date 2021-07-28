@@ -20,7 +20,7 @@ const App = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Typography variant="h5" component="h1">
+      <Typography variant="h5" component="h1" paragraph>
         Create Order
       </Typography>
       <Paper square className={classes.paper}>

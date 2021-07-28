@@ -1,38 +1,49 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
+import Select from '../Select';
+import Input from '../Input';
 import Section from '../Section';
 
 const DetailSection = () => {
   return (
-    <Section>
-      <Grid container>
-        <Grid item xs={3}>
-          Detail
+    <Section title="Detail">
+      <Grid container spacing={1}>
+        <Grid item xs={10}>
+          <Select
+            label="Name"
+            options={[{ value: '', label: 'hello' }]}
+            required
+          />
         </Grid>
-        <Grid item xs={9}>
-          <div>
-            <TextField select label="Name" variant="outlined">
-              <MenuItem>hello</MenuItem>
-            </TextField>
-          </div>
-          <div>
-            <TextField select label="Distribution Center" variant="outlined">
-              <MenuItem>hello</MenuItem>
-            </TextField>
-          </div>
-          <div>
-            <TextField select label="Payment Type" variant="outlined">
-              <MenuItem>hello</MenuItem>
-            </TextField>
-            <TextField select label="Expired Date" variant="outlined">
-              <MenuItem>hello</MenuItem>
-            </TextField>
-          </div>
-          <div>
-            <TextField label="Note" multiline rows={4} variant="outlined" />
-          </div>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={6}>
+          <Select
+            label="Distribution Center"
+            options={[{ value: '', label: 'hello' }]}
+            required
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={6}>
+          <Select
+            label="Payment Type"
+            options={[{ value: '', label: 'hello' }]}
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Select
+            label="Expired Date"
+            options={[{ value: '', label: 'hello' }]}
+            required
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={10}>
+          <Input label="Notes" multiline rows={4} />
         </Grid>
       </Grid>
     </Section>

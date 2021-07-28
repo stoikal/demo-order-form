@@ -6,16 +6,30 @@ import Section from '../Section';
 
 const ProductSection = () => {
   return (
-    <Section>
-      <Grid container>
-        <Grid item xs={3}>
-          Products
-        </Grid>
-        <Grid item xs={9}>
-          <Product />
-          <Button variant="contained" color="secondary">
-            NEW ITEM +
-          </Button>
+    <Section title="Products">
+      <Product />
+      <Button variant="contained" color="secondary">
+        NEW ITEM +
+      </Button>
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        alignItems="center"
+      >
+        <Grid
+          container
+          item
+          xs={6}
+          direction="row"
+          justifyContent="space-between"
+          style={{
+            padding: '1em 0',
+            margin: '1em 0',
+          }}
+        >
+          <Grid item>Total</Grid>
+          <Grid item>0</Grid>
         </Grid>
       </Grid>
     </Section>

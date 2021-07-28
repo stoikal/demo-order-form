@@ -17,6 +17,7 @@ module.exports = {
     'react/forbid-prop-types': 0,
     'react/destructuring-assignment': 0,
     'react/require-default-props': 0,
+    'react/jsx-props-no-spreading': 0,
     'prettier/prettier': 'error',
     'no-underscore-dangle': 0,
     'jsx-a11y/click-events-have-key-events': 0,
