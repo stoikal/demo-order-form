@@ -2,10 +2,11 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Section from '../Section';
 
 const DetailSection = () => {
   return (
-    <div>
+    <Section>
       <Grid container>
         <Grid item xs={3}>
           Detail
@@ -34,7 +35,7 @@ const DetailSection = () => {
           </div>
         </Grid>
       </Grid>
-    </div>
+    </Section>
   );
 };
 
