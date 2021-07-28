@@ -6,7 +6,7 @@ import Section from '../Section';
 
 const ProductSection = () => {
   return (
-    <Section title="Products">
+    <Section title="Products" hidden>
       <Product />
       <Button variant="contained" color="secondary">
         NEW ITEM +

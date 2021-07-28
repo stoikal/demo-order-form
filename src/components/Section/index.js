@@ -11,8 +11,10 @@ const useStyles = makeStyles({
   },
 });
 
-const Section = ({ title, children }) => {
+const Section = ({ title, hidden, children }) => {
   const classes = useStyles();
+
+  if (hidden) return null;
   return (
     <>
       <Grid container>
@@ -36,6 +38,7 @@ Section.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  hidden: PropTypes.bool,
 };
 
 export default Section;

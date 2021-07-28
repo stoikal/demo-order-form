@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import Grid from '../Grid';
 import Select from '../Select';
 import Input from '../Input';
 import Section from '../Section';
@@ -25,7 +25,7 @@ const DetailSection = () => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} hidden>
         <Grid item xs={6}>
           <Select
             label="Payment Type"
@@ -41,7 +41,7 @@ const DetailSection = () => {
           />
         </Grid>
       </Grid>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} hidden>
         <Grid item xs={10}>
           <Input label="Notes" multiline rows={4} />
         </Grid>
