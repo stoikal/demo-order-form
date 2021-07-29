@@ -7,6 +7,7 @@ import fetchEmployees from './fetchEmployees';
 import DISTRIBUTION_CENTERS from '../../mockData/distributionCenters';
 import PRODUCT_LIST from '../../mockData/products';
 import PAYMENT_TYPES from '../../mockData/paymentTypes';
+import validationSchema from './formSchema';
 
 const OrderForm = () => {
   const [employees, setEmployees] = useState([]);
@@ -52,8 +53,10 @@ const OrderForm = () => {
           notes: '',
           products: [initialProduct],
         }}
+        validationSchema={validationSchema}
       >
-        {({ values, setFieldValue }) => {
+        {({ values, setFieldValue, errors, dirty }) => {
+          const isSubmitDisabled = !dirty || !!Object.keys(errors).length;
           return (
             <Form>
               <DetailSection
@@ -74,7 +77,7 @@ const OrderForm = () => {
                   setFieldValue,
                 )}
               />
-              <ActionSection />
+              <ActionSection isSubmitDisabled={isSubmitDisabled} />
             </Form>
           );
         }}

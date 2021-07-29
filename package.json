@@ -61,7 +61,8 @@
     "formik": "^2.2.9",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "yup": "^0.32.9"
   },
   "repository": "https://github.com/lakhansamani/react-minimal-boilerplate"
 }

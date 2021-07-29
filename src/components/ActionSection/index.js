@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
@@ -6,7 +7,7 @@ const margin = {
   margin: '0.5em',
 };
 
-const ActionSection = () => {
+const ActionSection = ({ isSubmitDisabled }) => {
   return (
     <Grid
       container
@@ -18,12 +19,22 @@ const ActionSection = () => {
         <Button variant="contained" style={margin}>
           Cancel
         </Button>
-        <Button variant="contained" style={margin} color="primary" disabled>
+        <Button
+          type="submit"
+          variant="contained"
+          style={margin}
+          color="primary"
+          disabled={isSubmitDisabled}
+        >
           Confirm
         </Button>
       </Grid>
     </Grid>
   );
+};
+
+ActionSection.propTypes = {
+  isSubmitDisabled: PropTypes.bool,
 };
 
 export default ActionSection;
