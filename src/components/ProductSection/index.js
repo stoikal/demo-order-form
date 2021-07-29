@@ -10,6 +10,14 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
   const [grandTotal, setGrandTotal] = useState(0);
   const { distributorName, distributionCenter, products } = values;
 
+  const usedUnits = products.reduce((res, { product, unit }) => {
+    if (!unit) return res;
+    return {
+      ...res,
+      [product]: [...(res[product] || []), unit],
+    };
+  }, {});
+
   const isSectionHidden = !distributorName || !distributionCenter;
 
   // eslint-disable-next-line camelcase
@@ -18,12 +26,21 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
     label: product_name,
   }));
 
+  const filterUnitList = (list, productId) => {
+    return list.filter((item) => {
+      return !usedUnits[productId].includes(item.name);
+    });
+  };
+
+  // TODO memoize
   const getUnitOptions = (productData) => {
-    const { product } = productData;
+    const { product, unit } = productData;
 
     if (product) {
-      const unitList = productList.find(({ id }) => id === product)?.units;
+      let unitList = productList.find(({ id }) => id === product)?.units;
       if (unitList) {
+        if (!unit) unitList = filterUnitList(unitList, product);
+
         return unitList.map(({ name, price }) => ({
           value: name,
           label: name,
