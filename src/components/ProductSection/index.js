@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,7 @@ import Section from '../Section';
 import noop from '../../utils/noop';
 
 const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
+  const [grandTotal, setGrandTotal] = useState(0);
   const { distributorName, distributionCenter, products } = values;
 
   const isSectionHidden = !distributorName || !distributionCenter;
@@ -23,10 +24,22 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
     if (product) {
       const unitList = productList.find(({ id }) => id === product)?.units;
       if (unitList) {
-        return unitList.map(({ name }) => ({ value: name, label: name }));
+        return unitList.map(({ name, price }) => ({
+          value: name,
+          label: name,
+          price,
+        }));
       }
     }
     return [];
+  };
+
+  const handlePriceChange = () => {
+    const total = products.reduce((res, { quantity, price }) => {
+      return res + quantity * price;
+    }, 0);
+
+    setGrandTotal(total);
   };
 
   return (
@@ -39,8 +52,9 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
           unitOptions={getUnitOptions(product)}
           values={product}
           index={index}
-          showRemoveButton={!!index}
+          showRemoveButton={!!index} // show remove button if not first item
           onRemove={onRemoveItem}
+          onPriceChange={handlePriceChange}
         />
       ))}
       <Button variant="contained" color="secondary" onClick={onAddItem}>
@@ -64,7 +78,7 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
           }}
         >
           <Grid item>Total</Grid>
-          <Grid item>0</Grid>
+          <Grid item>{grandTotal}</Grid>
         </Grid>
       </Grid>
     </Section>

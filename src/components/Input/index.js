@@ -19,7 +19,7 @@ const Input = ({ ...restProps }) => {
       variant="outlined"
       className={classes.root}
       fullWidth
-      {...(name && { field })}
+      {...(name && field)}
       {...restProps}
     />
   );

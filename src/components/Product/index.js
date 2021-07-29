@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useFormikContext } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Remove from '@material-ui/icons/Remove';
@@ -13,15 +14,30 @@ const Product = ({
   unitOptions,
   index,
   values,
+  onPriceChange,
 }) => {
+  const { setFieldValue } = useFormikContext();
   const { product, price, quantity } = values;
-
   const itemPriceTotal = (() => {
     if (product && price && quantity) {
       return price * quantity;
     }
     return '';
   })();
+
+  useEffect(() => {
+    onPriceChange();
+  }, [itemPriceTotal]);
+
+  const handleUnitChange = (event) => {
+    const { value: newVal } = event.target;
+    const { price: newPrice } =
+      unitOptions.find(({ value }) => value === newVal) || {};
+
+    // FIXME
+    setFieldValue(`products[${index}].unit`, newVal);
+    setFieldValue(`products[${index}].price`, newPrice);
+  };
 
   return (
     <div style={{ position: 'relative' }}>
@@ -47,6 +63,7 @@ const Product = ({
             name={`products[${index}].unit`}
             label="Unit"
             options={unitOptions}
+            onChange={handleUnitChange} // override default behavior
             required
           />
         </Grid>
@@ -69,7 +86,13 @@ const Product = ({
           />
         </Grid>
         <Grid item xs={6}>
-          <Input label="Total Price" value={itemPriceTotal} disabled required />
+          <Input
+            label="Total Price"
+            name={`products[${index}].itemPriceTotal`}
+            value={itemPriceTotal} // override formik value
+            disabled
+            required
+          />
         </Grid>
       </Grid>
       <Grid
@@ -125,6 +148,7 @@ Product.propTypes = {
       label: PropTypes.string,
     }),
   ),
+  onPriceChange: PropTypes.func,
 };
 
 export default Product;

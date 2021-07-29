@@ -4,7 +4,7 @@ export default function fetchEmployees({ onSuccess }) {
       if (res.status < 200 || res.status >= 300) {
         throw res;
       }
-      onSuccess(res.data);
+      onSuccess(res.data.data);
     })
     .catch(() => {
       // too often server will return 429 | too many requests
