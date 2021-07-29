@@ -26,9 +26,9 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
     label: product_name,
   }));
 
-  const filterUnitList = (list, productId) => {
-    return list.filter((item) => {
-      return !usedUnits[productId].includes(item.name);
+  const filterUnitList = (list, productId, currUnit) => {
+    return list.filter(({ name }) => {
+      return name === currUnit || !usedUnits[productId]?.includes(name);
     });
   };
 
@@ -39,7 +39,7 @@ const ProductSection = ({ productList, values, onAddItem, onRemoveItem }) => {
     if (product) {
       let unitList = productList.find(({ id }) => id === product)?.units;
       if (unitList) {
-        if (!unit) unitList = filterUnitList(unitList, product);
+        unitList = filterUnitList(unitList, product, unit);
 
         return unitList.map(({ name, price }) => ({
           value: name,
