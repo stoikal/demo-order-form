@@ -47,10 +47,14 @@ const DetailSection = ({
           />
         </Grid>
         <Grid item xs={6}>
-          <Select
+          <Input
+            type="date"
+            format="dd/mm/yyyy"
             name="expiredDate"
             label="Expired Date"
-            options={[{ value: '1', label: 'EXPIRED_DATE' }]}
+            InputLabelProps={{
+              shrink: true,
+            }}
             required
           />
         </Grid>

@@ -42,6 +42,11 @@ const OrderForm = () => {
     ]);
   };
 
+  const handleSubmit = (values) => {
+    // eslint-disable-next-line no-console
+    console.log('form', values);
+  };
+
   return (
     <div>
       <Formik
@@ -54,6 +59,7 @@ const OrderForm = () => {
           products: [initialProduct],
         }}
         validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
         {({ values, setFieldValue, errors, dirty }) => {
           const isSubmitDisabled = !dirty || !!Object.keys(errors).length;
