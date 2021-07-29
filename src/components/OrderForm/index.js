@@ -43,8 +43,8 @@ const OrderForm = () => {
   };
 
   const handleSubmit = (values) => {
-    // eslint-disable-next-line no-console
-    console.log('form', values);
+    // eslint-disable-next-line no-alert
+    alert(JSON.stringify(values));
   };
 
   return (
