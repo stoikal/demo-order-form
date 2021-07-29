@@ -34,6 +34,13 @@ const OrderForm = () => {
     setFieldValue('products', [...products, initialProduct]);
   };
 
+  const createRemoveProductHandler = (products, setFieldValue) => (index) => {
+    setFieldValue('products', [
+      ...products.slice(0, index),
+      ...products.slice(index + 1),
+    ]);
+  };
+
   return (
     <div>
       <Formik
@@ -56,9 +63,13 @@ const OrderForm = () => {
                 values={values}
               />
               <ProductSection
-                products={PRODUCT_LIST}
+                productList={PRODUCT_LIST.products}
                 values={values}
                 onAddItem={createAddProductHandler(
+                  values.products,
+                  setFieldValue,
+                )}
+                onRemoveItem={createRemoveProductHandler(
                   values.products,
                   setFieldValue,
                 )}

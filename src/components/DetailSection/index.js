@@ -13,7 +13,6 @@ const DetailSection = ({
 }) => {
   const { distributorName, distributionCenter } = values;
   const isExtendedFormHidden = !distributorName || !distributionCenter;
-  const optsPlaceholder = [{ value: '', label: 'No data available' }];
 
   return (
     <Section title="Detail">
@@ -31,12 +30,10 @@ const DetailSection = ({
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <Select
+            required
             name="distributionCenter"
             label="Distribution Center"
-            options={
-              values.distributorName ? distCenterOptions : optsPlaceholder
-            }
-            required
+            {...(distributorName && { options: distCenterOptions })}
           />
         </Grid>
       </Grid>
@@ -53,7 +50,7 @@ const DetailSection = ({
           <Select
             name="expiredDate"
             label="Expired Date"
-            options={[{ value: '1', label: 'hello' }]}
+            options={[{ value: '1', label: 'EXPIRED_DATE' }]}
             required
           />
         </Grid>

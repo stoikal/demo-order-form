@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const Select = ({ options, ...restProps }) => {
   const classes = useStyles();
   const [field] = useField(restProps);
+  const optsPlaceholder = [{ value: '', label: 'No data available' }];
 
   return (
     <TextField
@@ -24,7 +25,7 @@ const Select = ({ options, ...restProps }) => {
       {...field}
       {...restProps}
     >
-      {options.map(({ label, value }) => (
+      {(options.length ? options : optsPlaceholder).map(({ label, value }) => (
         <MenuItem key={value} value={value}>
           {label}
         </MenuItem>

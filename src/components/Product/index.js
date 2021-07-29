@@ -6,12 +6,29 @@ import Remove from '@material-ui/icons/Remove';
 import Select from '../Select';
 import Input from '../Input';
 
-const Product = ({ showRemoveButton, index }) => {
+const Product = ({
+  showRemoveButton,
+  onRemove,
+  productOptions,
+  unitOptions,
+  index,
+  values,
+}) => {
+  const { product, price, quantity } = values;
+
+  const itemPriceTotal = (() => {
+    if (product && price && quantity) {
+      return price * quantity;
+    }
+    return '';
+  })();
+
   return (
     <div style={{ position: 'relative' }}>
       {showRemoveButton && (
         <IconButton
           style={{ position: 'absolute', top: '0.5em', left: '-2em' }}
+          onClick={() => onRemove(index)}
         >
           <Remove />
         </IconButton>
@@ -21,7 +38,7 @@ const Product = ({ showRemoveButton, index }) => {
           <Select
             name={`products[${index}].product`}
             label="Product"
-            options={[{ value: '1', label: 'hello' }]}
+            options={productOptions}
             required
           />
         </Grid>
@@ -29,7 +46,7 @@ const Product = ({ showRemoveButton, index }) => {
           <Select
             name={`products[${index}].unit`}
             label="Unit"
-            options={[{ value: '1', label: 'hello' }]}
+            options={unitOptions}
             required
           />
         </Grid>
@@ -52,7 +69,7 @@ const Product = ({ showRemoveButton, index }) => {
           />
         </Grid>
         <Grid item xs={6}>
-          <Input label="Total Price" disabled required />
+          <Input label="Total Price" value={itemPriceTotal} disabled required />
         </Grid>
       </Grid>
       <Grid
@@ -75,7 +92,7 @@ const Product = ({ showRemoveButton, index }) => {
           }}
         >
           <Grid item>Total nett price</Grid>
-          <Grid item>0</Grid>
+          <Grid item>{itemPriceTotal}</Grid>
         </Grid>
       </Grid>
     </div>
@@ -88,13 +105,26 @@ Product.defaultProps = {
 
 Product.propTypes = {
   showRemoveButton: PropTypes.bool,
-  data: PropTypes.shape({
+  values: PropTypes.shape({
     product: PropTypes.string,
     quantity: PropTypes.number,
     unit: PropTypes.string,
     price: PropTypes.number,
   }),
   index: PropTypes.number,
+  onRemove: PropTypes.func,
+  productOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ),
+  unitOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ),
 };
 
 export default Product;
