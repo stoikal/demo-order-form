@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useField } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,16 +13,21 @@ const useStyles = makeStyles((theme) => ({
 
 const Select = ({ options, ...restProps }) => {
   const classes = useStyles();
+  const [field] = useField(restProps);
+
   return (
     <TextField
       select
       variant="outlined"
       className={classes.root}
       fullWidth
+      {...field}
       {...restProps}
     >
       {options.map(({ label, value }) => (
-        <MenuItem value={value}>{label}</MenuItem>
+        <MenuItem key={value} value={value}>
+          {label}
+        </MenuItem>
       ))}
     </TextField>
   );

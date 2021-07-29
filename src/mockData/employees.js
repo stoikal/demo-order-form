@@ -1,5 +1,4 @@
 export default {
-  status: 'success',
   data: [
     {
       id: 1,
@@ -170,5 +169,4 @@ export default {
       profile_image: '',
     },
   ],
-  message: 'Successfully! All records has been fetched.',
 };

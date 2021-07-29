@@ -1,33 +1,59 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect } from 'react';
+import { Formik, Form } from 'formik';
 import DetailSection from '../DetailSection';
 import ProductSection from '../ProductSection';
-
-const margin = {
-  margin: '0.5em',
-};
+import ActionSection from '../ActionSection';
+import fetchEmployees from './fetchEmployees';
+import DISTRIBUTION_CENTERS from '../../mockData/distributionCenters';
+import PRODUCT_LIST from '../../mockData/products';
+import PAYMENT_TYPES from '../../mockData/paymentTypes';
 
 const OrderForm = () => {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetchEmployees({
+      onSuccess: setEmployees,
+    });
+  }, []);
+
+  // eslint-disable-next-line camelcase
+  const distNameOptions = employees.map(({ id, employee_name }) => ({
+    value: id.toString(),
+    label: employee_name,
+  }));
+
+  const distCenterOptions = DISTRIBUTION_CENTERS.data.map(({ id, name }) => ({
+    value: id.toString(),
+    label: name,
+  }));
+
   return (
     <div>
-      <DetailSection />
-      <ProductSection />
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="center"
+      <Formik
+        initialValues={{
+          distributorName: '',
+          distributionCenter: '',
+          paymentType: '',
+          expiredDate: '',
+          notes: '',
+        }}
       >
-        <Grid item>
-          <Button variant="contained" style={margin}>
-            Cancel
-          </Button>
-          <Button variant="contained" style={margin} color="primary" disabled>
-            Confirm
-          </Button>
-        </Grid>
-      </Grid>
+        {({ values }) => {
+          return (
+            <Form>
+              <DetailSection
+                distNameOptions={distNameOptions}
+                distCenterOptions={distCenterOptions}
+                paymentOptions={PAYMENT_TYPES.data}
+                values={values}
+              />
+              <ProductSection products={PRODUCT_LIST} />
+              <ActionSection />
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 };
