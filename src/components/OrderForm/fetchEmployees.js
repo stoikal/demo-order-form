@@ -8,6 +8,7 @@ export default function fetchEmployees({ onSuccess }) {
     })
     .catch(() => {
       // too often server will return 429 | too many requests
+      // eslint-disable-next-line no-console
       console.error('fetching employee list failed, fallback to local data...');
       return import('../../mockData/employees');
     })

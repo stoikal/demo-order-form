@@ -28,6 +28,12 @@ const OrderForm = () => {
     label: name,
   }));
 
+  const initialProduct = { product: '', unit: '', quantity: '', price: '' };
+
+  const createAddProductHandler = (products, setFieldValue) => () => {
+    setFieldValue('products', [...products, initialProduct]);
+  };
+
   return (
     <div>
       <Formik
@@ -37,9 +43,10 @@ const OrderForm = () => {
           paymentType: '',
           expiredDate: '',
           notes: '',
+          products: [initialProduct],
         }}
       >
-        {({ values }) => {
+        {({ values, setFieldValue }) => {
           return (
             <Form>
               <DetailSection
@@ -48,7 +55,14 @@ const OrderForm = () => {
                 paymentOptions={PAYMENT_TYPES.data}
                 values={values}
               />
-              <ProductSection products={PRODUCT_LIST} />
+              <ProductSection
+                products={PRODUCT_LIST}
+                values={values}
+                onAddItem={createAddProductHandler(
+                  values.products,
+                  setFieldValue,
+                )}
+              />
               <ActionSection />
             </Form>
           );

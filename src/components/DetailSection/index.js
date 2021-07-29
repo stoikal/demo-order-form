@@ -11,9 +11,8 @@ const DetailSection = ({
   paymentOptions,
   values,
 }) => {
-  const isExtendedFormHidden =
-    !values.distributorName || !values.distributionCenter;
-
+  const { distributorName, distributionCenter } = values;
+  const isExtendedFormHidden = !distributorName || !distributionCenter;
   const optsPlaceholder = [{ value: '', label: 'No data available' }];
 
   return (

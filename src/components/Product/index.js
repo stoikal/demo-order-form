@@ -6,7 +6,7 @@ import Remove from '@material-ui/icons/Remove';
 import Select from '../Select';
 import Input from '../Input';
 
-const Product = ({ showRemoveButton }) => {
+const Product = ({ showRemoveButton, index }) => {
   return (
     <div style={{ position: 'relative' }}>
       {showRemoveButton && (
@@ -19,25 +19,37 @@ const Product = ({ showRemoveButton }) => {
       <Grid container spacing={1}>
         <Grid item xs={10}>
           <Select
+            name={`products[${index}].product`}
             label="Product"
-            options={[{ value: '', label: 'hello' }]}
+            options={[{ value: '1', label: 'hello' }]}
             required
           />
         </Grid>
         <Grid item xs={2}>
           <Select
+            name={`products[${index}].unit`}
             label="Unit"
-            options={[{ value: '', label: 'hello' }]}
+            options={[{ value: '1', label: 'hello' }]}
             required
           />
         </Grid>
       </Grid>
       <Grid container spacing={1}>
         <Grid item xs={3}>
-          <Input label="Quantity" required />
+          <Input
+            name={`products[${index}].quantity`}
+            type="number"
+            label="Quantity"
+            required
+          />
         </Grid>
         <Grid item xs={3}>
-          <Input label="Price" required />
+          <Input
+            name={`products[${index}].price`}
+            type="number"
+            label="Price"
+            required
+          />
         </Grid>
         <Grid item xs={6}>
           <Input label="Total Price" disabled required />
@@ -76,6 +88,13 @@ Product.defaultProps = {
 
 Product.propTypes = {
   showRemoveButton: PropTypes.bool,
+  data: PropTypes.shape({
+    product: PropTypes.string,
+    quantity: PropTypes.number,
+    unit: PropTypes.string,
+    price: PropTypes.number,
+  }),
+  index: PropTypes.number,
 };
 
 export default Product;

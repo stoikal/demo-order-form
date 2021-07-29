@@ -12,15 +12,14 @@ const useStyles = makeStyles((theme) => ({
 const Input = ({ ...restProps }) => {
   const classes = useStyles();
   const [field] = useField(restProps);
-
-  console.log('useField', field);
+  const { name } = restProps;
 
   return (
     <TextField
       variant="outlined"
       className={classes.root}
       fullWidth
-      {...field}
+      {...(name && { field })}
       {...restProps}
     />
   );
