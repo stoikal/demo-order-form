@@ -64,5 +64,9 @@
     "react-dom": "^16.13.1",
     "yup": "^0.32.9"
   },
-  "repository": "https://github.com/lakhansamani/react-minimal-boilerplate"
+  "engines": {
+    "node": "^14.21.3",
+    "npm": "^6.14.18",
+    "yarn": "^1.22.10"
+  }
 }
