@@ -1,7 +1,7 @@
 {
-  "name": "react-minimal-boilerplate",
+  "name": "demo-order-form",
   "version": "1.0.0",
-  "description": "Minimal boilerplate for starting react project",
+  "description": "klikdaily test",
   "main": "src/index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --open --mode development --content-base dist/ --history-api-fallback --hotOnly --colors",
